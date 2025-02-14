@@ -1,0 +1,17 @@
+type Query {
+    launches: [Launch]
+    launchById(id: String): Launch
+}
+
+type Launch {
+    id: String
+    missionName: String
+    launchDate: String
+    rocket: Rocket
+}
+
+type Rocket {
+    id: String
+    name: String
+    type: String
+}
