@@ -2,13 +2,16 @@ package com.wilkerjcpimenta.spacex_launches.resolver;
 
 import com.wilkerjcpimenta.spacex_launches.model.Launch;
 import com.wilkerjcpimenta.spacex_launches.service.SpaceXService;
-import graphql.kickstart.tools.GraphQLQueryResolver;
-import org.springframework.stereotype.Component;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
+import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Mono;
+import reactor.core.publisher.Flux;
+
 import java.util.List;
 
-@Component
-public class LaunchResolver implements GraphQLQueryResolver {
+@Controller
+public class LaunchResolver {
 
     private final SpaceXService spaceXService;
 
@@ -16,11 +19,13 @@ public class LaunchResolver implements GraphQLQueryResolver {
         this.spaceXService = spaceXService;
     }
 
-    public Mono<List<Launch>> launches() {
+    @QueryMapping
+    public Flux<Launch> launches() {
         return spaceXService.getAllLaunches();
     }
 
-    public Mono<Launch> launchById(String id) {
+    @QueryMapping
+    public Mono<Launch> launchById(@Argument String id) {
         return spaceXService.getLaunchById(id);
     }
 }

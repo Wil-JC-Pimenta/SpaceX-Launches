@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class Rocket {
-    private String rocket_name;
+    private String name;
 }

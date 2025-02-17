@@ -1,12 +1,26 @@
 package com.wilkerjcpimenta.spacex_launches.model;
 
-public class Launch {
-    private String id;
-    private String missionName;
-    private String launchDate;
-    private Rocket rocket;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    // Getters and Setters
+public class Launch {
+
+    // A API provavelmente retorna o ID como string
+    private String id;
+
+    @JsonProperty("name")
+    private String missionName;
+
+    @JsonProperty("date_utc")
+    private String launchDate;
+
+    // Construtor sem argumentos é importante para a deserialização
+    public Launch() {}
+
+    public Launch(String id, String missionName, String launchDate) {
+        this.id = id;
+        this.missionName = missionName;
+        this.launchDate = launchDate;
+    }
 
     public String getId() {
         return id;
@@ -30,13 +44,5 @@ public class Launch {
 
     public void setLaunchDate(String launchDate) {
         this.launchDate = launchDate;
-    }
-
-    public Rocket getRocket() {
-        return rocket;
-    }
-
-    public void setRocket(Rocket rocket) {
-        this.rocket = rocket;
     }
 }
